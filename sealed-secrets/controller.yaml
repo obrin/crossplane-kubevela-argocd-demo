@@ -181,7 +181,8 @@ spec:
         command:
         - controller
         env: []
-        image: quay.io/bitnami/sealed-secrets-controller:v0.13.1
+        # image: quay.io/bitnami/sealed-secrets-controller:v0.19.2
+        image: bitnami/sealed-secrets-controller:v0.19.2
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -230,23 +231,24 @@ spec:
     - name: v1alpha1
       # One and only one version must be marked as the storage version.
       storage: true
+      served: true
+      subresources:
+        status: {}
       schema:
         openAPIV3Schema:
           type: object
           properties:
             spec:
               type: object
-              properties:
-                encryptedData:
-                  type: object
-                template:
-                  type: object
-                # cronSpec:
-                #   type: string
-                # image:
-                #   type: string
-                # replicas:
-                #   type: integer
-      # subresources:
-      #   status: {}
+              x-kubernetes-preserve-unknown-fields: true
+            status:
+              x-kubernetes-preserve-unknown-fields: true
+          # properties:
+          #   spec:
+          #     type: object
+          #     properties:
+          #       encryptedData:
+          #         type: object
+          #       template:
+          #         type: object
 
