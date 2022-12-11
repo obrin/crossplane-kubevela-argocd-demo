@@ -109,7 +109,6 @@ helm upgrade --install \
     argocd argo/argo-cd \
     --namespace argocd \
     --create-namespace \
-    --set server.ingress.hosts="{argo-cd.$INGRESS_HOST.nip.io}" \
     --set server.ingress.enabled=true \
     --set server.extraArgs="{--insecure}" \
     --set controller.args.appResyncPeriod=30 \
@@ -130,7 +129,7 @@ argocd login \
     --username admin \
     --password $PASS \
     --grpc-web \
-    argo-cd.$INGRESS_HOST.nip.io
+    localhost:8080
 
 argocd account update-password \
     --current-password $PASS \
