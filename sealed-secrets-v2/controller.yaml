@@ -1,0 +1,11 @@
+apiVersion: helm.crossplane.io/v1beta1
+kind: Release
+metadata:
+  name: sealed-secrets-controller
+spec:
+  forProvider:
+    chart:
+      name: sealed-secrets
+      repository: https://charts.bitnami.com/bitnami
+      version: 0.19.2
+    namespace: kube-system
